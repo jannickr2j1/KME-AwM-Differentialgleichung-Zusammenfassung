@@ -1,0 +1,306 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{physics}
+\usepackage[left=1cm,right=1cm,top=2cm,bottom=1.5cm]{geometry}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{mhchem}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{csquotes}
+\usepackage{trfsigns}
+\usepackage{capt-of}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{empheq}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{esdiff}
+\usepackage{commath}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{minted}
+
+
+\sisetup{locale=DE}
+\sisetup{per-mode = symbol-or-fraction}
+\sisetup{separate-uncertainty=true}
+\DeclareSIUnit\year{a}
+\DeclareSIUnit\clight{c}
+\mdfdefinestyle{exercise}{
+	backgroundcolor=black!10,roundcorner=8pt,hidealllines=true,nobreak
+}
+
+\newtcbox{\mymath}[1][]{%
+  nobeforeafter, math upper, tcbox raise base, enhanced, colback=yellow!5!white, colframe=red!50!black, sharp corners, boxrule=1pt, boxsep=0pt, left=0pt, right=0pt, top=2pt, bottom=2pt, #1}
+\newtcolorbox{Bedingungsbox}[1][]{colback=gray!20, colframe=gray!50, sharp corners, boxrule=0.7pt, #1}
+
+\setlength{\parindent}{0pt}
+\definecolor{sub}{HTML}{cde4ff}
+\definecolor{main}{HTML}{5989cf}
+\tcbset{
+    sharp corners,
+    colback = white,
+    before skip = 0.2cm,  
+    after skip = 0.5cm    
+}
+
+\newtcolorbox{Definitionsbox}{
+    colback = sub, 
+    colframe = main, 
+    boxrule = 0pt, 
+    leftrule = 6pt 
+}
+
+\begin{document}
+\twocolumn
+\pagestyle{fancy}
+\lhead{Angewandte Mathematik: Differentialgleichungen \\ Zusammenfassung KME V6d}
+\rhead{\today \\ Jannick Riond}
+
+\section{Definition}
+\begin{Definitionsbox}
+  Unter einer gewöhnlichen Differentialgleichung $n$-ter Ordnung verstehen wir eine Gleichung, in der Ableitungen einer unbekannten Funktion $y = y(x)$ bis zur $n$-ten Ordnung auftreten.
+\end{Definitionsbox}
+\begin{mdframed}
+  \textbf{Beispiel:} Differentialgleichung 1. Ordnung
+  \begin{equation*}
+    y' = sin(x)
+  \end{equation*}
+  \\[10pt]
+$y' = y^{(1)}$: Lagrange-Schreibweise\\[5pt]
+$\diff{y}{x}$: Leibnitz-Schreibweise\\[5pt]
+$\dot{y}$: Newton-Schreibweise
+\end{mdframed}
+
+\subsection{Autonome Differentialgleichung}
+\begin{Definitionsbox}
+  Eine \textbf{Autonome Differentialgleichung} ist eine spezielle Art von Differentialgleichung, bei der die Ableitung nicht von $x$, also der unabhängigen Variable abhängt, sondern nur vom aktuellen Zustand der Funktion selbst.
+\end{Definitionsbox}
+\begin{mdframed}
+  \textbf{Beispiel:} Autonome Differentialgleichung\\
+  Die Gleichung
+  \begin{equation*}
+    \diff{y}{x} = y(x)
+  \end{equation*}
+  ist autonom, weil auf der rechten Seite $x$ nicht explizit vorkommt und somit nicht von $x$ abhängig ist.
+\end{mdframed}
+
+\section{Lösung einer Differentialgleichung}
+\subsection{Definition der Lösung}
+\begin{Definitionsbox}
+  Eine Funktion $y = y(x)$ heisst \textbf{Lösung der Differentialgleichung}, wenn sie mit ihren Ableitungen die Differentialgleichung identisch erfüllt.
+\end{Definitionsbox}
+Unter der allgemeinen Lösung einer Differentialgleichung versteht man grundsätzlich eine Lösungsmenge, die mithilfe der Integrationskonstante $C \in \mathbb{R}$ beschrieben wird.
+\begin{mdframed}
+  \textbf{Beispiel:} Allgemeine Lösung
+  \begin{equation*}
+    y = - cos(x) + C
+  \end{equation*}
+  $C$: Integrationskonstante
+\end{mdframed}
+Eine spezielle Lösung erhalten wir durch Einsetzen eines bestimmten Werts für diesen Paramter $C$.
+\begin{mdframed}
+  \textbf{Beispiel:} Spezielle Lösung
+  \begin{equation*}
+    y = - cos(x) + 3
+  \end{equation*}
+\end{mdframed}
+
+\subsection{Graphische Lösung: Das Richtungsfeld}
+\begin{Definitionsbox}
+  Ein \textbf{Anfangswertproblem} besteht aus einer Differentialgleichung und einer Anfangsbedingung.
+\end{Definitionsbox}
+
+\begin{equation*}
+  \begin{cases}
+    \begin{aligned}
+      y' &= f(x,y) \quad &\text{Differentialgleichung}\\ 
+      y(x_0) &= y_0 \quad &\text{Anfangsbedingung}
+    \end{aligned}
+  \end{cases}
+\end{equation*}
+
+\begin{Definitionsbox}
+  Das \textbf{Richtungsfeld} einer Differentialgleichung ist die Gesamtheit der Richtungselemente, welche die Steigung der Lösungskurve, die durch diesen Punkt verlaufen, repräsentieren.
+\end{Definitionsbox}
+
+\begin{mdframed}
+  \textbf{Beispiel:}
+  \input{Richtungsfeld.tex}
+  \begin{equation*}
+    \begin{cases}
+     \begin{aligned}
+        y' &= x - \frac{x}{y}\\ 
+        y(2) &= 2
+      \end{aligned}
+  \end{cases}
+\end{equation*}
+\\
+\indent Isoklinen: $y = 1$ und $x = 0$
+\end{mdframed}
+
+\begin{Definitionsbox}
+  \textbf{Isoklinen} sind Linien im Richtungsfeld, die gleiche Werte, also die gleiche Steigung, haben.
+\end{Definitionsbox}
+
+\newpage
+\section{Numerik}
+\subsection{Euler-Verfahren}
+Das Euler-Verfahren ist ein numerisches (also näherungsweises) Verfahren zur Approximation der unbekannten Lösungskurve eines allgemeinen Anfangswertproblems:
+\begin{equation*}
+  \begin{cases}
+    \begin{aligned}
+      y' &= f(x,y)\\ 
+      y(x_0) &= y_0
+    \end{aligned}
+  \end{cases}
+\end{equation*}
+Vom Ausgangspunkt P($x_0$,$y_0$) wird schrittweise mit der gewählten Schrittweite $h$ nach vorne gearbeitet, wobei $n \in \mathbb{N}$ und $h >0$.
+\begin{align*}
+  x_{n+1} &= x_n + h\\
+  y_{n+1} &= y_n + hf(x_k,y_k)
+\end{align*}
+
+Allerdings entsteht dabei ein Fehler $e_k$, der mit zunehmendem Abstand zum Ausgangspunkt grösser werden. Der Fehler an der Stelle $x_k$ ist einfach die Differenz der beiden Werte:
+\begin{equation*}
+  e_k := y(x_k) - y_k
+\end{equation*}
+
+\subsection{Grafische Veranschaulichung}
+Das Euler-Verfahren lässt uns die Funktionskurve erahnen. Je kleiner $h$, desto genauer wird die Approximation, jedoch steigt dadurch auch der Rechenaufwand, da wir noch mehr Punkte ausrechen müssen.
+\begin{mdframed}
+  \textbf{Beispiel:} $y' = x+y$, $x_0 = 1$, $y_0 = 1$, $h = 0.25$
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{scope}[scale=0.8]
+        \def\dx{0.5}
+        \def\dy{0.5}
+        \def\sx{-5}
+        \def\sy{-5}
+        \def\ex{5}
+        \def\ey{5}
+        \def\l{0.2}
+    
+        % Draw grid and axes
+        \draw[Gray, thin] (-5,-5) grid (5,5);
+        \draw[thick,latex-latex] (-5.5,0) -- (5.5,0);
+        \draw[thick,latex-latex] (0,-5.5) -- (0,5.5);
+    
+        % Ticks and labels
+        \foreach \i in {-5,...,-1,1,2,...,5} {
+          \draw[thick] (\i,0)--(\i,-0.1);
+          \node[below] at (\i,-0.1) {\i};
+          \draw[thick] (0,\i)--(-0.1,\i);
+          \node[left] at (-0.1,\i) {\i};
+        }
+    
+        % Vector field for y' = x + y
+        \foreach \x in {-5,-4.5,...,5} {
+          \foreach \y in {-5,-4.5,...,-0.5,0.5,1,...,5} {
+            \pgfmathsetmacro{\m}{\x+\y}
+            \pgfmathsetmacro{\k}{\l/sqrt(1+\m*\m)}
+            \pgfmathsetmacro{\h}{\k*\m}
+            \draw[thick,Emerald] (\x,\y) -- (\x+\k,\y+\h);
+            \draw[thick,Emerald] (\x,\y) -- (\x-\k,\y-\h);
+          }
+        }
+    
+        % Euler's method: h = 0.25, starting at (0,1), n = 10 points
+        \pgfmathsetmacro{\x}{0}
+        \pgfmathsetmacro{\y}{1}
+        \draw[Orange,fill=white,thick] (\x,\y) circle (0.1); % initial point
+    
+        \foreach \i in {1,...,6} {
+          \pgfmathsetmacro{\f}{\x+\y}
+          \pgfmathsetmacro{\xnew}{\x + 0.25}
+          \pgfmathsetmacro{\ynew}{\y + 0.25*\f}
+          \draw[ultra thick, Orange] (\x,\y) -- (\xnew,\ynew);
+          \draw[Orange,fill=white,thick] (\xnew,\ynew) circle (0.08);
+          \xdef\x{\xnew}
+          \xdef\y{\ynew}
+        }
+    
+        % Exact solution: y = 2e^x - x - 1
+        \draw[thick, Purple, domain=-0.5:1.3, samples=100, smooth] 
+          plot (\x, {2*exp(\x) - \x - 1});
+      \end{scope}
+    \end{tikzpicture}
+    \end{center}
+
+    \begin{itemize}
+      \item Das Euler-Verfahren in \textcolor{Orange}{Orange}.
+      \item Die exakte Lösung in \textcolor{Violet}{Violet}.
+      \item Das Richtungsfeld in \textcolor{Emerald}{Grün (Emerald)}.
+    \end{itemize}
+\end{mdframed}
+
+\newpage
+\subsubsection{Exkurs Programmierung des Euler-Verfahrens}
+\paragraph{Python}
+\begin{minted}{python3}
+  def euler (f, x0, y0, h, n)
+    x = x0
+    y = y0
+    result = [(x, y)]
+    for i in range(n):
+      x += h
+      y += h * f(x, y)
+      result.append((x, y))
+    return result
+\end{minted}
+
+\section{Separation}
+Bei diesem Verfahren wird die Differentialgleichung so umgeformt, dass man sie anschliessend durch integrieren lösen kann.
+\begin{Definitionsbox}
+  Eine gewöhnliche Differentialgleichung 1. Ordnung heisst \textbf{seperabel}, wenn sie sich auf folgende Form bringen lässt:
+  \begin{equation*}
+    y' = h(y) \cdot g(x) = h(y(x)) \cdot g(x)
+  \end{equation*}
+\end{Definitionsbox}
+
+\subsection{Lösungsvorgehen}
+\begin{enumerate}
+  \item $y' = \diff{y}{x}$ einfügen
+  \item Seperation von $y$ und $x$
+  \item Integrieren (links nach $y$ und rechts nach $y$)
+  \item Auflösen nach $y$
+\end{enumerate}
+Wobei der 4. Schritt nicht immer möglich ist $\Rightarrow$ Numerisches Verfahren!
+
+\begin{mdframed}
+  \textbf{Beispiel:} Separation\\
+  Differentialgleichung: $y' = -2 \cdot cos(x) \cdot y(x)$, wobei $y \neq 0$
+  \begin{align*}
+    \diff{y}{x} &= -2 \cdot cos(x) \cdot y(x) \qquad |\cdot \dif x \quad |\cdot \frac{1}{y}\\
+    \int \big(\frac{1}{\textcolor{blue}{y}}\big) \dif \textcolor{blue}{y} &= \int \big(-2 \cdot cos(\textcolor{red}{x})\big) \dif \textcolor{red}{x}\\
+    \ln(|y|) &= -2 \cdot \sin(x) + c_1 \qquad \quad | \, e^{()}\\
+     |y| &= e^{-2 \cdot \sin(x) + c_1} \qquad \quad | \, c_2 := e^{c_1}\\
+     |y| &= e^{-2 \cdot \sin(x)} \cdot c_2\\
+     y(x) &= e^{-2 \cdot \sin(x)} \cdot c \, \Rightarrow \text{Allgemeine Lösung}
+  \end{align*}
+\end{mdframed}
+
+\subsection{Singuläre Lösung}
+Eine singuläre Lösung ist eine Lösung der Differentialgleichung, die beim normalen Herleiten nicht auftaucht.
+\begin{mdframed}
+  \textbf{Beispiel:} Singuläre Lösung\\
+  Differentialgleichung: $y' = -2 \cdot cos(x) \cdot y(x)$, wobei $y \neq 0$
+  \begin{align*}
+     y' &= -2 \cdot cos(x) \cdot y(x)\\
+     y(x) &= 0 \, \Rightarrow \text{Singuläre Lösung}
+  \end{align*}
+\end{mdframed}
+
+\end{document}
